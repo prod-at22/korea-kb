@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PT SEL — Korea Knowledge Base (ARBA Travel)</title>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f5f6f8; --card:#ffffff; --ink:#1c2333; --muted:#5c6678;
+  --line:#e4e7ee; --brand:#1f3a8a; --brand2:#2b57d6; --brandsoft:#eef2ff;
+  --halal:#0f7a4d; --halalsoft:#e6f5ee; --warn:#b45309; --warnsoft:#fdf3e3;
+  --chip:#eef1f6; --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 80px}
+header.hd{background:linear-gradient(135deg,#1f3a8a,#2b57d6);color:#fff;border-radius:16px;
+  padding:20px 22px;box-shadow:var(--shadow)}
+.hd .flag{font-size:26px}
+.hd h1{margin:6px 0 4px;font-size:21px;font-weight:750;letter-spacing:-.2px}
+.hd p{margin:0;opacity:.92;font-size:13.5px;max-width:640px}
+.cred{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cred span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);
+  padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+.toolbar{position:sticky;top:0;z-index:20;background:var(--bg);padding:14px 0 8px;margin-top:16px}
+.search{position:relative}
+.search input{width:100%;padding:12px 40px 12px 40px;border:1px solid var(--line);border-radius:12px;
+  font-size:15px;background:#fff;box-shadow:var(--shadow);outline:none}
+.search input:focus{border-color:var(--brand2);box-shadow:0 0 0 3px var(--brandsoft)}
+.search .ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search .clr{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:var(--chip);
+  color:var(--muted);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:12px;display:none}
+.nav{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.nav a{font-size:12.5px;text-decoration:none;color:var(--brand);background:#fff;border:1px solid var(--line);
+  padding:5px 11px;border-radius:999px;font-weight:600;white-space:nowrap;transition:.12s}
+.nav a:hover{background:var(--brandsoft);border-color:var(--brand2)}
+.status{font-size:12px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:7px}
+.dot{width:8px;height:8px;border-radius:50%;background:#c9ced9;display:inline-block}
+.dot.live{background:#16a34a} .dot.loading{background:#eab308;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.35}}
+section.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.sec h2{margin:0 0 4px;font-size:17px;font-weight:750;display:flex;align-items:center;gap:9px}
+.sec h2 .n{background:var(--brandsoft);color:var(--brand);width:26px;height:26px;border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.subtitle{color:var(--muted);font-size:13px;font-style:italic;margin:2px 0 12px}
+.note{background:var(--brandsoft);border:1px solid #d9e1ff;border-radius:10px;padding:11px 13px;margin:10px 0;font-size:13.5px;color:#2a3a6b}
+ul.klist{list-style:none;padding:0;margin:8px 0}
+ul.klist li{position:relative;padding:6px 0 6px 22px;border-bottom:1px dashed var(--line);font-size:14px}
+ul.klist li:last-child{border-bottom:none}
+ul.klist li:before{content:"";position:absolute;left:4px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--brand2)}
+table.kb{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+table.kb th{background:var(--brandsoft);color:var(--brand);text-align:left;padding:8px 10px;font-weight:700;border:1px solid #dce3f7}
+table.kb td{padding:7px 10px;border:1px solid var(--line);vertical-align:top}
+table.kb tr:nth-child(even) td{background:#fafbfe}
+.catgrid{margin-top:6px}
+.cat{margin-top:14px}
+.cat h3{font-size:14.5px;font-weight:750;color:var(--brand);margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--brandsoft)}
+details.qa{border:1px solid var(--line);border-radius:11px;margin:8px 0;background:#fff;overflow:hidden}
+details.qa[open]{border-color:var(--brand2);box-shadow:0 2px 10px rgba(43,87,214,.08)}
+details.qa summary{cursor:pointer;list-style:none;padding:11px 14px;font-weight:650;font-size:14px;
+  display:flex;gap:10px;align-items:flex-start}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary .tw{color:var(--brand2);transition:.15s;flex:0 0 auto;margin-top:1px}
+details.qa[open] summary .tw{transform:rotate(90deg)}
+.ans{padding:2px 14px 13px 38px;font-size:14px;color:#26303f}
+.ans p{margin:6px 0} .ans strong{color:var(--ink)}
+.ans ul,.ans ol{margin:6px 0;padding-left:20px} .ans li{margin:3px 0}
+mark{background:#fff3ba;padding:0 2px;border-radius:3px}
+.badge-halal{display:inline-block;background:var(--halalsoft);color:var(--halal);border:1px solid #bfe6d1;
+  font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:middle}
+.noresult{text-align:center;color:var(--muted);padding:26px;display:none}
+footer{margin-top:22px;font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
+footer a{color:var(--brand2)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hd">
+    <div class="flag">🇰🇷</div>
+    <h1>PT SEL — Korea Knowledge Base</h1>
+    <p>Rujukan customer-facing untuk pakej Korea (Seoul · Busan · Jeju). Polisi, halal &amp; solat, visa/K-ETA, flight, hotel, cuaca, tips. Untuk costing, guna <em>PT SEL ProdReq</em>.</p>
+    <div class="cred">
+      <span>Berlesen MOTAC · sejak 2014</span>
+      <span>Pakej Korea #1 Malaysia</span>
+      <span>900+ testimoni · 4.8/5 Google</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search">
+      <span class="ico">🔍</span>
+      <input id="q" type="search" placeholder="Cari jawapan… cth: halal, K-ETA, salji, deposit, cherry blossom" autocomplete="off">
+      <button class="clr" id="clr">Clear</button>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="status"><span class="dot loading" id="dot"></span><span id="statustxt">Memuatkan versi terkini dari Drive…</span></div>
+  </div>
+
+  <div id="content"></div>
+  <div class="noresult" id="noresult">Tiada hasil untuk carian ini. Cuba kata kunci lain.</div>
+
+  <footer>
+    Sumber: <a id="srclink" href="https://drive.google.com/file/d/17m_UmCJpgX5UY8qMPwE1cRvmlfI0xwt5/view" target="_blank" rel="noopener">PT SEL Korea KB (FAQ &amp; Info).md</a> — Google Drive.
+    Butiran seperti kos K-ETA, tempoh full payment &amp; harga flight boleh berubah; sahkan dengan consultant sebelum sahkan kepada customer.
+  </footer>
+</div>
+
+<script type="text/markdown" id="snapshot">
+# PT SEL — Korea Knowledge Base (Important Notes · FAQ · Marketing Info)
+
+> **Guna dokumen ini** untuk jawab soalan customer tentang pakej Korea (Seoul/Busan/Jeju) ARBA Travel — polisi, halal, visa, cuaca, flight, hotel, tips, dsb. Ini pengetahuan **customer-facing** (rujukan sales & khidmat pelanggan). Untuk **kira harga/costing**, guna fail berasingan *PT SEL ProdReq.md*. Nada jawapan: mesra, ringkas, dalam Bahasa Melayu. Jangan reka fakta — kalau tak pasti, minta customer semak dengan consultant.
+
+## 1. IMPORTANT NOTES (Polisi Pakej)
+
+*PT SEL — 3 varian: PT Basic / PT Standard / ST Seoul — semua 5D4N 2026 v2*
+
+- Semua harga sah **24 jam** selepas quotation dihantar.
+- Harga untuk **2–3 orang sebilik**.
+- **Single Supplement:** semua varian — tambahan **RM1,000/orang**.
+- **Late Booking Surcharge RM50/booking** jika booking <45 hari sebelum berlepas.
+- Pembayaran secara **tunai (cash)**.
+- **PT Basic:** Private Driver/Guide 10 jam (Day 1–2 sahaja); 30,000–60,000 KRW setiap jam lebih.
+- **PT Standard:** Private Driver/Guide 10 jam (Day 1–4); kadar jam lebih sama.
+- **Driving Guide untuk group 2–8 pax; Private driver + professional guide untuk 9 pax ke atas.**
+- **ST (Self Tour):** trip self-guided; konsultasi 14 hari sebelum; bantuan online waktu Malaysia 9am–6pm sahaja.
+- Bilik hotel Seoul kecil (~12–20 sqft standard Korea); bilik triple lagi kecil.
+- **PT Basic/Standard:** restoran halal-friendly / kedai serbaneka disarankan (lunch/dinner tidak disediakan).
+- Airport transfer: **maksimum 1 bagasi per pax** (jejas kapasiti kereta).
+- Sesetengah stesen tren banyak tangga.
+- Itinerari muktamad **14 hari** sebelum trip.
+- Aktiviti percuma tak boleh ditukar dengan aktiviti lain/voucher/tunai jika guest tak sertai (cth cuaca/availability).
+- Pakej sah untuk perjalanan hingga **31 Disember 2026**.
+- **Deposit & Full Payment:** Deposit **RM500/orang** semasa confirmation. **Full payment 45 HARI sebelum travel date.**
+- **Peak Season Surcharge:** 1–30 April, 1–31 Mei, 1–31 Oktober 2026. **Super Peak:** 20 Dis 2026 – 1 Jan 2027.
+
+## 2. MARKETING INFO
+
+**Target Market:** Primary — Family · Secondary — Multi-Generational.
+
+**Anchor Attractions:** (1) Pengalaman 4 Musim (2) K-Wave / K-Drama Nostalgia (3) Salji & Ski di Vivaldi Park (4) Cherry Blossom (Sakura Korea) (5) Everland Theme Park (6) Heritage & Hanbok Experience (7) Shopping Halal-Friendly (8) Foodhunting Halal (9) Nightlife Bandar Modern.
+
+**USP:** (1) Hotel City Centre · (2) Tiada Tourist Trap & Halal Dijaga · (3) 10 hours tour.
+
+**Anchor ikut musim:**
+
+| Musim | Anchor utama |
+|---|---|
+| Dec–Feb (Winter) | Salji + Vivaldi Ski Park |
+| Apr–May (Spring) | Cherry Blossom |
+| Jun–Sep (Summer) | Heritage + Shopping |
+| Oct–Nov (Autumn) | Autumn Foliage + Cuaca Sederhana |
+
+**What to Expect (brief customer):** Accommodation bilik kecil ~15–20 sqft (triple lagi kecil); banyak berjalan (pakai kasut selesa); exclude lunch & dinner (tiada breakfast jika pilih Apartment) — guide bawa ke restoran halal-friendly; airport transfer maksimum 1 bagasi/pax; Korean English-Speaking Driving Guide; 10 jam, 30,000–60,000 KRW setiap jam lebih.
+
+**Kredibiliti:** ARBA Travel berlesen MOTAC, beroperasi sejak 2014. Dikenali sebagai Pakej Korea #1 Malaysia — 900+ testimoni, rating 4.8/5 Google.
+
+## 3. FAQ
+
+### A. Pakej & Itinerari
+
+**Pakej Seoul ni berapa hari?**
+Basic/Standard pakej 5 Hari 4 Malam, sesuai untuk first-timer cover Seoul.
+
+**Tempat apa yang akan dilawati?**
+Standard: Nami Island, Namsan Tower, Gyeongbok Palace, Myeongdong Street, Hongdae, Itaewon Mosque, Namdaemun Market, Everland atau Vivaldi Ski Park (musim sejuk).
+
+**Boleh customize itinerari ikut citarasa saya tak?**
+Boleh — ini private tour. Boleh tukar attractions, fokus shopping/family/K-drama spot. Inform driver/consultant 1 minggu sebelum departure.
+
+**Apa beza PT Seoul Basic dan Standard?**
+Basic ada 2 hari Free & Easy (tanpa transport & guide). Standard adalah full day tour sepanjang pakej.
+
+**Apa beza Self Tour (ST) dengan Private Tour (PT)?**
+Self Tour guna public transport & tiada guide. Private Tour naik private transport & ada tour guide.
+
+**Self Tour termasuk cost public transport tak?**
+Tidak — kami provide T-Money card (macam Touch & Go), anda top up sendiri di kaunter berdekatan stesen tren.
+
+**Boleh pergi Nami Island? Nak tengok tempat shooting drama.**
+Boleh — Nami termasuk dalam standard. Lokasi shooting Winter Sonata & Crash Landing On You. ~1 jam 30 minit dari Seoul.
+
+**Nami Island naik feri ke?**
+Ya, naik feri — sudah termasuk dalam pakej.
+
+**Di Nami boleh zipline/railbike/basikal?**
+Boleh — bayar sendiri di sana.
+
+**Everland macam Disneyland Korea? Berbaloi?**
+Everland taman tema terbesar Korea. Sesuai family dengan anak-anak. Berbaloi kalau suka rides — allocate 1 hari penuh.
+
+**Boleh main salji/ski di Vivaldi?**
+Boleh — Vivaldi buka musim sejuk (Dis–Feb). Boleh add-on transport untuk Basic; Standard boleh tukar salah satu hari (tambahan harga). Equipment rental bayar sendiri (~RM300–350 untuk ski equipment + baju + helmet).
+
+**Vivaldi add-on termasuk ski equipment tak?**
+TIDAK. Equipment rental & ski lesson top-up berasingan di lokasi.
+
+**Snowyland/Vivaldi buka awal Disember?**
+Biasanya belum buka penuh awal Disember. Trip awal Dis akan ditolak ke hujung Dis atau attraction alternatif disediakan.
+
+**Boleh combo Busan/Jeju dengan Seoul?**
+Pakej ini fokus Seoul. Untuk Busan/Jeju ada pakej berasingan atau combo Seoul + Busan/Jeju.
+
+**Boleh experience Hanbok di Gyeongbok Palace?**
+Boleh — popular. Sewa Hanbok sekitar Gyeongbok ~RM80 untuk 4 jam.
+
+**Apa boleh buat masa Free & Easy day?**
+Jalan sendiri / shopping: Myeongdong, Namdaemun, Dongdaemun, Hongdae. Hotel dekat subway untuk akses mudah.
+
+### B. Halal, Makanan & Solat
+
+**Makanan halal senang dapat di Korea?**
+Terhad berbanding negara Muslim, tapi kami ada list restoran 100% halal certified — disemak tim ARBA yang 8 tahun tinggal di Korea.
+
+**Contoh restoran halal?**
+Restoran halal / Muslim-friendly yang kami bawa (lunch & dinner): (1) **Kampungku** — Myeongdong, Jung-gu (5 min jalan dari Myeongdong Stn Exit 2); masakan Malaysia halal, ada surau tingkat 3. (2) **Dongmun Restaurant** — Nami Island / Gapyeong; halal-certified KMF, ada surau + wudu tingkat 2. (3) **Gosami** — Sinchon / Sogang area; masakan Korea halal. (4) **Kervan** — Itaewon; restoran Turki halal-certified (kebab). (5) **Cheum** — Myeongdong / Namsan; set meal Korea tradisional halal. (6) **Sindang Tteokbokki** — Sindang-dong (bukan semua kedai halal — sahkan bahan dulu). Lain-lain: Eid Halal Korean Food, Yang Good (halal Korean BBQ), Busan Jib, Murree Pakistani, dan beberapa di Itaewon.
+
+**Macam mana pastikan restoran halal?**
+Cari logo **Korea Muslim Federation Halal Committee (KMF)** pada papan tanda restoran — rujukan rasmi pengesahan halal di Korea.
+
+**Risau makanan ada arak. Macam mana?**
+Banyak masakan Korea guna soju/mirin. Sebab itu kami strict pilih restoran halal. Untuk street food, kami ajar mana yang safe (cth tteokbokki tanpa sos arak, hotteok, fish cake halal).
+
+**Macam mana nak solat? Ada masjid/surau?**
+Itaewon Mosque (Seoul Central Mosque) masjid utama. Luar Itaewon, kami plan stop solat di rest area / prayer room di mall tertentu. Driver tahu lokasi.
+
+**Solat sepanjang trip macam mana?**
+Solat jamak Maghrib + Isya' di hotel. Zuhur + Asar di restoran yang ada surau.
+
+**Hotel ada surau/qiblat?**
+Biasanya tiada qiblat marker. Kami beri cadangan compass app & info qiblat. Boleh request sejadah sebelum departure.
+
+**Waktu solat Subuh sama dengan Malaysia?**
+Sangat berbeza. Musim panas: Subuh lebih awal. Musim sejuk: lebih lambat. Tour Leader share waktu solat di Group WhatsApp setiap hari.
+
+**Sedap ke makanan Korea kalau beli pakej PT with meals?**
+Makanan harian: kombinasi makanan Korea, nasi beriyani & masakan Melayu.
+
+### C. Visa, K-ETA & Passport
+
+**Perlu visa untuk Korea?**
+Malaysian perlu **K-ETA** (Korea Electronic Travel Authorization) — bukan visa tradisional. ARBA uruskan A–Z, siap dalam 1 hari bekerja.
+
+**Kos K-ETA?**
+Fee rasmi ~KRW 10,000 (~RM35). ARBA charge minimal untuk handling. Tanya consultant untuk rate terkini.
+
+**Warga emas (65+) atau anak bawah 18 perlu K-ETA?**
+TIDAK. K-ETA dikecualikan untuk bawah 18 & 65 tahun ke atas. Pastikan dokumen lain (passport, return ticket) lengkap.
+
+**Passport kena sah berapa lama?**
+Minimum 6 bulan dari tarikh balik. Blank page minimum 2 muka.
+
+**Macam nak elak kena reject masuk Korea?**
+Pastikan K-ETA approved. Bawa proof return flight, hotel booking, duit cukup (min USD 1,000 tunai/setara). Dress neat masa imigresen. ARBA bagi briefing sebelum departure.
+
+**Bukan warganegara Malaysia (cth Singapore) perlu visa?**
+Singaporean tidak perlu visa. Warganegara lain, semak requirement spesifik.
+
+**ARBA boleh proses K-ETA untuk ahli keluarga bukan warganegara Malaysia?**
+Tidak — ARBA hanya proses untuk warganegara Malaysia. Warganegara lain mohon sendiri di Kedutaan Korea KL.
+
+**PCR test masih wajib?**
+Tidak. Korea dah lift PCR/quarantine sejak 2023.
+
+### D. Flight & Airport
+
+**Flight termasuk dalam pakej?**
+PT Basic/Standard **GROUND-ONLY** — tak termasuk flight. Kami boleh bantu quote bundle flight + ground (AirAsia X, Korean Air, Malaysia Airlines KUL–ICN).
+
+**Flight recommended untuk PT Seoul:**
+
+| Airline | Flight | Depart (KUL) | Arrive (ICN) | Jenis | Anggaran Return (RM) |
+|---|---|---|---|---|---|
+| Malaysia Airlines | MH 66 | 23:30 | 07:10 (+1) | Full Service | RM 2,200–2,800 |
+| Korean Air | KE 692 | 23:55 | 07:20 (+1) | Premium | RM 2,800–3,500 |
+| AirAsia X | D7 506 | 22:40 | 06:10 (+1) | Low Cost | RM 1,200–1,800 |
+| Batik Air | OD 820 | 22:30 | 06:00 (+1) | Low Cost | RM 1,600–2,100 |
+
+**Sampai airport mana di Seoul?**
+Incheon International Airport (ICN). Dari ICN ke city centre ~1 jam naik kereta.
+
+**Berapa lama flight KL–Seoul?**
+~6 jam 15 minit direct.
+
+**Kena sampai airport berapa awal?**
+Sekurang-kurangnya 3 jam sebelum berlepas. Peak holidays lebih awal. Pintu pelepasan antarabangsa tutup 1 jam sebelum.
+
+**Boarding pass macam mana?**
+Beli tiket via ARBA — kami bagi panduan online check-in & boarding pass via WhatsApp. Beli sendiri — buat online check-in sendiri sebelum ke airport.
+
+**Kaunter check-in bagasi KLIA buka bila?**
+3 jam sebelum penerbangan. Berada di kaunter selewatnya 2 jam sebelum flight.
+
+**Sampai Incheon, macam nak jumpa driver ARBA?**
+Selepas ambil bagasi, ke Arrival Hall. Driver ARBA tunggu pegang papan tanda "ARBA Travel" + nama peserta. Kenderaan peribadi terus dari airport.
+
+### E. Hotel & Bilik
+
+**Hotel apa digunakan? Bersih?**
+Hotel 3 star city centre — Travelodge Myeongdong Namsan. Lokasi strategik, walking distance ke shopping & street food. Boleh upgrade 5-star (top-up).
+
+**Boleh upgrade hotel 5-star?**
+Boleh — tambahan harga untuk hotel premium (Lotte Hotel Seoul, Westin Josun, setaraf). Kami check harga & availability ikut travel date.
+
+**Family besar (5–6 orang), bilik macam mana?**
+Standard 2/bilik (twin sharing). Family ambil 2–3 bilik. Triple jarang available — confirm awal.
+
+**Ada connecting room untuk family?**
+Hanya bilik berdua/bertiga. Connecting room TIADA. Kami susun bilik berdekatan (bergantung availability ikut musim).
+
+**Hotel sediakan tuala & seterika?**
+Tuala disediakan. Seterika — request dari receptionist.
+
+**Nak PT tapi ada hotel/Airbnb sendiri. Boleh?**
+Boleh — PT boleh disesuaikan tanpa hotel/accommodation.
+
+**Nak tidur Apartment/Airbnb, ARBA boleh buatkan?**
+Boleh, tapi kami sarankan tuan/puan book sendiri (kebanyakan Airbnb tiada lif — susah angkut bagasi). Tiada penambahan harga kecuali request Airbnb melebihi budget yang ditetapkan.
+
+### F. Cuaca & Musim
+
+**Cuaca Korea macam mana? Bila best pergi?**
+1°C (winter) – 29°C (summer). Best: April (cherry blossom), Oktober (autumn foliage), Dis–Feb (snow & ski). Summer (Jun–Ogos) panas & humid, banyak hujan.
+
+**Nak tengok salji, bila best?**
+Dis–Feb peak winter. Salji paling tebal mid-January. Suhu boleh -10°C — bawa winter jacket, beanie, gloves, thermal.
+
+**Cherry blossom musim bila?**
+Hujung Mac – pertengahan April (ikut tahun). Sangat singkat (1–2 minggu) — book awal. ARBA ada cherry blossom special package.
+
+**Cherry blossom hingga bila?**
+Biasanya Spring (April–Mei). Hujung Mei selalunya dah layu. Tertakluk cuaca tahun tersebut — tiada jaminan 100%.
+
+**Strawberry picking ada lagi masa Mei?**
+Biasanya farm buka sampai Mei. Tertakluk hukum alam — pokok masih berbuah atau tidak.
+
+**Ada tarikh orang Korea cuti & kedai tutup?**
+Ada — Chuseok Festival (macam Hari Raya). Tarikh ikut kalendar lunar, berbeza setiap tahun. Semak tarikh terkini — banyak kedai & attraction tutup.
+
+### G. Shopping & Duit
+
+**Korea murah ke shopping?**
+Agak mahal berbanding Asia Tenggara. Best buy: skincare/cosmetics (Olive Young, Innisfree), fashion Hongdae & Myeongdong, K-pop merch. Tax refund untuk pembelian >KRW 30,000.
+
+**Berapa duit poket untuk shopping?**
+Cadangan: RM1,500–RM2,000 per orang.
+
+**Better tukar duit di Malaysia atau Korea?**
+Tukar di Malaysia siap-siap (Mid Valley, Masjid India, IOI City Mall Putrajaya). Bawa sedikit tunai je, selebihnya guna kad (aktifkan oversea withdrawal dulu).
+
+**Boleh guna kad debit/kredit Malaysia di Korea?**
+Boleh — aktifkan oversea withdrawal pada kad dulu. Hubungi bank untuk pengaktifan.
+
+### H. Payment & Refund
+
+**Deposit dulu atau bayar penuh?**
+Booking dengan deposit RM500/orang. **Full payment (baki) 45 hari sebelum travel date.** Pembayaran secara tunai / online transfer.
+
+**Refund policy kalau cancel?**
+Bergantung bila cancel — biasanya deposit forfeit jika cancel <14 hari. Detail penuh dalam T&C.
+
+**Visa/K-ETA rejected, deposit refund?**
+>45 hari sebelum departure: full refund jika rejected. <45 hari: ikut polisi pembatalan biasa.
+
+### I. Add-ons & Customization
+
+**Nak tour guide sahaja, tak nak pakej penuh. Boleh?**
+Boleh — ambil driving guide sahaja: tanpa meals, tanpa entrance fee.
+
+**Boleh request tour guide tertentu (nampak di Instagram)?**
+Untuk guide spesifik, pilih Private Tour (PT) — kami check availability guide dulu.
+
+**PT Seoul, tak nak lunch & dinner, boleh tolak?**
+Boleh — tolak RM35/meal dari harga pakej.
+
+### J. Kesihatan, Keselamatan & Emergency
+
+**Selamat bawa anak kecil ke Korea?**
+Sangat selamat. Korea low-crime. Public transport bersih, family-friendly. Sesuai family termasuk warga emas & baby.
+
+**Kalau emergency/sakit?**
+Driver standby sepanjang trip. Hospital Seoul standard tinggi. Sangat encourage travel insurance — tambahan RM50–80/orang untuk Korea.
+
+**Keselamatan barang di Korea?**
+Low-crime, tapi berhati-hati di tempat sesak (Myeongdong, Hongdae, subway). Jaga barang rapi, beg berdekatan, jangan letak telefon/dompet di poket belakang.
+
+### K. Praktikal (SIM, App, Socket, Toilet)
+
+**Internet/SIM di Korea?**
+Sewa pocket WiFi di airport (~KRW 5,000/hari), beli SIM Korea (KT/SK Telecom), atau eSIM (Airalo/Maya) sebelum bertolak (~RM50 untuk 5GB).
+
+**App berguna untuk navigation?**
+(1) **NAVER Map** (English) — Google Maps tak berfungsi sepenuhnya di Korea; (2) **Subway Korea** — navigasi tren bawah tanah.
+
+**Plug socket Korea jenis apa?**
+2-pin (Type C / Type F). Bawa travel universal adaptor. Digalakkan bawa extension plug.
+
+**Toilet di Korea ada hose/paip macam Malaysia?**
+Tidak ada. Bawa botol kecil/spray ke toilet untuk kemudahan diri.
+
+### L. Packing / Barang Bawa
+
+**Barang basic untuk trip Seoul?**
+Passport, sweater/winter coat (ikut musim), thermal wear (Uniqlo Heat Tech disarankan), sejadah travel, telekung, botol spray untuk wudhu, kasut sneakers selesa, ubat peribadi, international adapter, payung kecil, powerbank, duit poket.
+
+**Kasut macam mana sesuai?**
+Sneakers / kasut selesa untuk permukaan rata. Trip Seoul banyak jalan kaki — kasut tak selesa ganggu pengalaman.
+</script>
+
+<script>
+const FILE_ID = "17m_UmCJpgX5UY8qMPwE1cRvmlfI0xwt5";
+const DRIVE_TOOL = "mcp__093c6433-ba91-40f2-ae0e-6dd83ea05b59__read_file_content";
+
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function unescapeMd(t){ return t.replace(/\\([#\-*>|&<~.\\`_])/g,"$1"); }
+function inline(t){
+  t=esc(t);
+  t=t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+  t=t.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g,"<em>$1</em>");
+  return t;
+}
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const HALAL_RE=/\bhalal|surau|solat|qiblat|kmf|masjid|mosque|wudu|sejadah|telekung|arak|soju\b/i;
+
+// --- render answer body: paragraphs / lists / tables ---
+function renderBody(lines){
+  let html="",i=0;
+  while(i<lines.length){
+    let ln=lines[i];
+    if(/^\s*\|.*\|\s*$/.test(ln)){
+      const tbl=[]; while(i<lines.length && /^\s*\|.*\|\s*$/.test(lines[i])){tbl.push(lines[i]);i++;}
+      html+=renderTable(tbl); continue;
+    }
+    if(/^\s*[-*]\s+/.test(ln)){
+      let items=[]; while(i<lines.length && /^\s*[-*]\s+/.test(lines[i])){items.push(lines[i].replace(/^\s*[-*]\s+/,""));i++;}
+      html+="<ul>"+items.map(x=>"<li>"+inline(x)+"</li>").join("")+"</ul>"; continue;
+    }
+    if(/^\s*\d+\.\s+/.test(ln)){
+      let items=[]; while(i<lines.length && /^\s*\d+\.\s+/.test(lines[i])){items.push(lines[i].replace(/^\s*\d+\.\s+/,""));i++;}
+      html+="<ol>"+items.map(x=>"<li>"+inline(x)+"</li>").join("")+"</ol>"; continue;
+    }
+    if(ln.trim()){ html+="<p>"+inline(ln.trim())+"</p>"; }
+    i++;
+  }
+  return html;
+}
+function renderTable(rows){
+  rows=rows.filter(r=>!/^\s*\|[\s\-|:]+\|\s*$/.test(r));
+  const cells=r=>r.trim().replace(/^\||\|$/g,"").split("|").map(c=>c.trim());
+  if(!rows.length) return "";
+  let h="<table class='kb'><thead><tr>"+cells(rows[0]).map(c=>"<th>"+inline(c)+"</th>").join("")+"</tr></thead><tbody>";
+  for(let r=1;r<rows.length;r++) h+="<tr>"+cells(rows[r]).map(c=>"<td>"+inline(c)+"</td>").join("")+"</tr>";
+  return h+"</tbody></table>";
+}
+
+// --- parse markdown into sections ---
+function parse(md){
+  const lines=unescapeMd(md).split(/\r?\n/);
+  const secs=[]; let cur=null, subs=null;
+  let i=0;
+  // skip title + intro blockquote until first ##
+  while(i<lines.length){
+    const ln=lines[i];
+    if(/^##\s+/.test(ln)){
+      const title=ln.replace(/^##\s+/,"").trim();
+      cur={title, id:slug(title), type:/FAQ/i.test(title)?"faq":"info", intro:[], cats:[]};
+      secs.push(cur); subs=null; i++; continue;
+    }
+    if(cur){
+      if(cur.type==="faq" && /^###\s+/.test(ln)){
+        subs={title:ln.replace(/^###\s+/,"").trim(), qas:[]};
+        subs.id=slug(subs.title); cur.cats.push(subs); i++; continue;
+      }
+      if(cur.type==="faq" && subs){
+        // question = a line fully wrapped in ** **
+        const m=ln.match(/^\*\*(.+?)\*\*\s*$/);
+        if(m){
+          const q=m[1]; const body=[]; i++;
+          while(i<lines.length && !/^\*\*(.+?)\*\*\s*$/.test(lines[i]) && !/^###\s+/.test(lines[i]) && !/^##\s+/.test(lines[i])){
+            body.push(lines[i]); i++;
+          }
+          subs.qas.push({q, body}); continue;
+        }
+        i++; continue;
+      }
+      // info section: collect raw
+      cur.intro.push(ln); i++; continue;
+    }
+    i++;
+  }
+  return secs;
+}
+
+function build(md){
+  const secs=parse(md);
+  const nav=$("#nav"); nav.innerHTML="";
+  const cont=$("#content"); cont.innerHTML="";
+  secs.forEach((s,idx)=>{
+    const a=document.createElement("a"); a.href="#"+s.id; a.textContent=s.title.replace(/^\d+\.\s*/,""); nav.appendChild(a);
+    const sec=document.createElement("section"); sec.className="sec"; sec.id=s.id;
+    const num=idx+1;
+    sec.innerHTML="<h2><span class='n'>"+num+"</span>"+esc(s.title.replace(/^\d+\.\s*/,""))+"</h2>";
+    if(s.type==="info"){
+      // extract subtitle (italic single line) and bullet list + tables + paragraphs
+      const body=s.intro.slice();
+      // subtitle
+      let sub=null;
+      for(let k=0;k<body.length;k++){ if(/^\*[^*].*\*$/.test(body[k].trim())){ sub=body[k].trim().replace(/^\*|\*$/g,""); body.splice(k,1); break; } }
+      if(sub) sec.innerHTML+="<div class='subtitle'>"+esc(sub)+"</div>";
+      // split bullets group specially so we use klist style
+      let i=0,html="";
+      while(i<body.length){
+        let ln=body[i];
+        if(/^\s*[-*]\s+/.test(ln)){
+          let items=[]; while(i<body.length && /^\s*[-*]\s+/.test(body[i])){items.push(body[i].replace(/^\s*[-*]\s+/,""));i++;}
+          html+="<ul class='klist'>"+items.map(x=>"<li>"+inline(x)+"</li>").join("")+"</ul>"; continue;
+        }
+        if(/^\s*\|.*\|\s*$/.test(ln)){ let t=[]; while(i<body.length&&/^\s*\|.*\|\s*$/.test(body[i])){t.push(body[i]);i++;} html+=renderTable(t); continue; }
+        if(ln.trim()){ html+="<p>"+inline(ln.trim())+"</p>"; }
+        i++;
+      }
+      sec.innerHTML+=html;
+    } else {
+      const grid=document.createElement("div"); grid.className="catgrid";
+      s.cats.forEach(cat=>{
+        const c=document.createElement("div"); c.className="cat"; c.id=cat.id;
+        c.innerHTML="<h3>"+esc(cat.title)+"</h3>";
+        cat.qas.forEach(qa=>{
+          const halal=HALAL_RE.test(qa.q+" "+qa.body.join(" "));
+          const d=document.createElement("details"); d.className="qa";
+          d.dataset.text=(qa.q+" "+qa.body.join(" ")).toLowerCase();
+          d.innerHTML="<summary><span class='tw'>▶</span><span>"+inline(qa.q)+(halal?"<span class='badge-halal'>halal/solat</span>":"")+"</span></summary>"+
+                      "<div class='ans'>"+renderBody(qa.body)+"</div>";
+          c.appendChild(d);
+        });
+        grid.appendChild(c);
+      });
+      sec.appendChild(grid);
+    }
+    cont.appendChild(sec);
+  });
+  applyFilter();
+}
+
+// --- search ---
+function applyFilter(){
+  const q=$("#q").value.trim().toLowerCase();
+  $("#clr").style.display=q?"block":"none";
+  let any=false;
+  document.querySelectorAll("details.qa").forEach(d=>{
+    // clear old marks
+    const show=!q || d.dataset.text.includes(q);
+    d.classList.toggle("hidden",!show);
+    if(show) any=true;
+    d.open = q && show ? true : d.open && !q ? d.open : (q&&show);
+    if(!q) d.open=false;
+  });
+  // hide empty categories & sections
+  document.querySelectorAll(".cat").forEach(c=>{
+    const vis=c.querySelectorAll("details.qa:not(.hidden)").length;
+    c.classList.toggle("hidden", q && vis===0);
+  });
+  document.querySelectorAll("section.sec").forEach(s=>{
+    if(!q){ s.classList.remove("hidden"); return; }
+    const isFaq=s.querySelector(".catgrid");
+    if(isFaq){
+      const vis=s.querySelectorAll("details.qa:not(.hidden)").length;
+      s.classList.toggle("hidden", vis===0);
+    } else {
+      s.classList.toggle("hidden", !s.textContent.toLowerCase().includes(q));
+      if(!s.classList.contains("hidden")) any=true;
+    }
+  });
+  $("#noresult").style.display = (q && !any) ? "block" : "none";
+}
+
+$("#q").addEventListener("input",applyFilter);
+$("#clr").addEventListener("click",()=>{$("#q").value="";applyFilter();$("#q").focus();});
+
+// --- initial render from snapshot, then live fetch ---
+function setStatus(cls,txt){ $("#dot").className="dot "+cls; $("#statustxt").textContent=txt; }
+build($("#snapshot").textContent);
+
+(async()=>{
+  try{
+    if(!window.cowork||!window.cowork.callMcpTool){ setStatus("","Paparan snapshot (buka dalam Cowork untuk versi live)"); return; }
+    const r=await window.cowork.callMcpTool(DRIVE_TOOL,{fileId:FILE_ID});
+    const data=r.structuredContent ?? JSON.parse(r.content[0].text);
+    const md=data.fileContent||data.content||"";
+    if(md && md.length>200){
+      build(md);
+      const now=new Date().toLocaleString("ms-MY",{dateStyle:"medium",timeStyle:"short"});
+      setStatus("live","Versi terkini dari Drive · dimuatkan "+now);
+    } else { setStatus("","Paparan snapshot (live fetch kosong)"); }
+  }catch(e){
+    console.error("live fetch failed",e);
+    setStatus("","Paparan snapshot (live fetch gagal) — "+(e&&e.message||e));
+  }
+})();
+</script>
+</body>
+</html>
