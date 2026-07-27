@@ -315,6 +315,15 @@ footer{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);font-si
 #lightbox .lbx{position:absolute;top:14px;right:22px;color:#fff;font-size:34px;font-weight:700;line-height:1;cursor:pointer}
 .actim img,.hmain img,.adhero img,.vthumb img{cursor:zoom-in}
 
+
+.cmp{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px}
+.cmp th{background:var(--green);color:#fff;padding:11px 8px;text-align:center;font-weight:800;font-size:12px;letter-spacing:.5px;border:2px solid #fff}
+.cmp th.blank{background:transparent;border:none}
+.cmp td{border:2px solid #fff;padding:9px 12px;vertical-align:middle}
+.cmp td.feat{background:#f3d97a;color:#5a4a12;font-weight:700;font-size:12.5px;width:52%}
+.cmp td.val{background:#fbf6e6;text-align:center;font-weight:800;color:#3d3d3d}
+.cmp .tick{color:#1a8a3c;font-size:17px;font-weight:900}
+.cmp .no{color:#c4c4c4;font-weight:800}
 </style>
 </head>
 <body>
@@ -891,6 +900,7 @@ function parse(md){const lines=unescapeMd(md).split(/\r?\n/);const secs=[];let c
     i++;}
   return secs;}
 const TOPICS=[
+ {id:"compare",ic:"",t:"Perbezaan Pakej"},
  {id:"itin",ic:"",t:"Itinerary & Activities"},
  {id:"itinsugg",ic:"",t:"Itinerary Suggestions"},
  {id:"custom",ic:"",t:"Simple Customisation"},
@@ -904,6 +914,7 @@ const TOPICS=[
  {id:"weather",ic:"",t:"Weather"},
  {id:"tips",ic:"",t:"Shopping & Tips"},
  {id:"visa",ic:"",t:"Visa & K-ETA"},
+ {id:"freegift",ic:"",t:"Free Gift (Promo)"},
  {id:"polisi",ic:"",t:"Polisi & Payment"},
 ];
 const CATMAP={a:"itin",i:"itin",e:"stay",d:"flight",f:"weather",g:"tips",j:"tips",k:"tips",l:"tips",c:"visa",h:"polisi"};
@@ -1212,6 +1223,19 @@ const SURCHARGE_HTML = `
     </tbody></table>
     <p class="custnote">Harga kanak-kanak dikira dari harga adult muktamad (cth Adult RM 2,797 → CWB RM 2,597 → CNB RM 2,397). Infant dikecualikan peak surcharge.</p>
   </div>
+
+  <div class="custblk">
+    <h3>Peak Season Surcharge — Rate Card 2026 / 2027</h3>
+    <div class="notebox" style="margin-top:0"><b>Tetingkap tarikh:</b> Peak Season — 1–30 April · 1–31 Mei · 1–31 Oktober (2026/2027). Super Peak — 16 Disember 2026 – 1 Januari 2027.</div>
+    <table class="ctbl"><thead><tr><th>Pakej</th><th>Peak Season</th><th>Super Peak</th></tr></thead><tbody>
+      <tr><td class="it">Seoul Basic (5D4N)</td><td class="add">RM 50</td><td class="add">RM 90</td></tr>
+      <tr><td class="it">Seoul STD (5D4N) · Seoul–Jeju STD (6D5N)</td><td class="add">RM 90</td><td class="add">RM 140</td></tr>
+      <tr><td class="it">ST Seoul (5D4N)</td><td class="add">RM 50</td><td class="add">RM 120</td></tr>
+      <tr><td class="it">Jeju (4D3N) · Jeju–Udo (5D4N) · ST Jeju (4D3N)</td><td class="add">RM 50</td><td class="add">RM 100</td></tr>
+    </tbody></table>
+    <p class="custnote">Kadar <b>per malam, per pax</b> (Infant dikecualikan). <b>Travel Date 2027 (1 Jan – 30 Jun 2027): tambah RM 100/pax</b> di ATAS surcharge peak season. <b>Late booking:</b> booking &lt;45 hari sebelum berlepas → RM 50/booking.</p>
+    <p class="custnote" style="color:#b03030"><b>Nota PO:</b> Rate card 2026/2027 ini disusun mengikut <b>pakej</b>, manakala jadual surcharge katalog di atas disusun mengikut <b>tahap hotel</b>. Angka Basic/Standard sepadan; ST Seoul super-peak RM 120 adalah baharu. Sila sahkan dengan PO jika berlainan dengan katalog. Sumber: 2026/2027 Date Surcharge.</p>
+  </div>
 `;
 const ACTS=[
  {city:"Seoul", items:[
@@ -1236,6 +1260,67 @@ function renderActs(){
     }).join('')+'</div>';
   }).join('');
 }
+
+const COMPARE_HTML = `
+  <h2>Perbezaan Pakej — Seoul Basic vs Seoul Standard (5D4N)</h2>
+  <p class="ssub" style="margin:0 0 10px">Kedua-dua pakej guna hotel 3★ &amp; driving guide berbahasa Inggeris. Bezanya jumlah hari tour berpandu &amp; aktiviti yang disertakan.</p>
+  <table class='cmp'><colgroup><col class='c1'><col><col></colgroup>
+   <thead><tr><th class='blank'></th><th>SEOUL BASIC</th><th>SEOUL STANDARD</th></tr></thead>
+   <tbody>
+    <tr><td class='feat'>Hotel (3★, default)</td><td class='val'>Designers Cheongnyangni</td><td class='val'>Travelodge Myeongdong Namsan</td></tr>
+    <tr><td class='feat'>Tempoh tour berpandu (driving guide)</td><td class='val'>2 hari (Day 1–2)</td><td class='val'>4 hari (Day 1–4)</td></tr>
+    <tr><td class='feat'>Hari Free &amp; Easy</td><td class='val'>2 hari</td><td class='val'><span class='no'>—</span></td></tr>
+    <tr><td class='feat'>Airport transfer (2 hala)</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Breakfast di hotel</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Nami Island</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Gyeongbokgung Palace</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Namdaemun Market</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Itaewon Central Mosque (solat)</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Seongsu + Myeongdong shopping tour</td><td class='val'><span class='no'>—</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>N Seoul Tower (cable car)</td><td class='val'><span class='no'>—</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Entrance fee ikut itinerari</td><td class='val'><span class='tick'>✔</span></td><td class='val'><span class='tick'>✔</span></td></tr>
+    <tr><td class='feat'>Hanbok rental @ Gyeongbok</td><td class='val'>Add-on (RM 80)</td><td class='val'>Add-on (RM 80)</td></tr>
+    <tr><td class='feat'>Harga dari (2 pax / pax)</td><td class='val'>RM 3,497</td><td class='val'>RM 4,597</td></tr>
+    <tr><td class='feat'>Harga dari (5–7 pax / pax)</td><td class='val'>RM 2,397</td><td class='val'>RM 2,597</td></tr>
+    <tr><td class='feat'>Peak surcharge 3★ (/pax/malam)</td><td class='val'>RM 50 · Super RM 90</td><td class='val'>RM 90 · Super RM 140</td></tr>
+   </tbody>
+  </table>
+  <p class="custnote">✔ = termasuk · Add-on = naik taraf berbayar · <span style="color:#c4c4c4;font-weight:800">—</span> = tidak termasuk. Harga rujukan katalog Ground &amp; Tipping (sah hingga 31 Dis 2026). Sumber: PT SEL ProdReq.</p>
+`;
+const FREEGIFT_HTML = `
+  <h2>🎁 Free Gift (Promo)</h2>
+  <details class='qa'>
+   <summary><span class='tw'>▶</span><span>Free Gift untuk campaign atau Promo?</span></summary>
+   <div class='ans'>
+     <p><strong>Seoul:</strong> Hanbok <span class='rtag'>Kod: FSEL2</span></p>
+     <p><strong>Bullet:</strong> BRB Luggage Tag / Pocket Wifi 4G per booking</p>
+     <p style='color:#b03030'>*Bullet wajib tanya PO/Leader</p>
+     <p style='color:#b03030'><strong>Disclaimer:</strong> Sila sahkan dengan PO jika di luar waktu Promo. Sumber: FreeGift Campaign.</p>
+   </div>
+  </details>
+`;
+const FLIGHT_RECO_HTML = `
+  <div class="custblk flt-reco">
+    <h3>Flight Recommendation — KUL → Seoul (Incheon / ICN)</h3>
+    <table class="ctbl"><thead><tr><th>Airline</th><th>Flight</th><th>Departs KUL</th><th>Arrives ICN</th><th>Type</th><th>Anggaran Round-Trip</th></tr></thead><tbody>
+      <tr><td class="it">Malaysia Airlines</td><td>MH 66</td><td>11:30 PM</td><td>07:10 AM (+1)</td><td>Full Service</td><td class="add">RM 2,200 – 2,800</td></tr>
+      <tr><td class="it">Korean Air</td><td>KE 692</td><td>11:55 PM</td><td>07:20 AM (+1)</td><td>Premium</td><td class="add">RM 2,800 – 3,500</td></tr>
+      <tr><td class="it">AirAsia X</td><td>D7 506</td><td>10:40 PM</td><td>06:10 AM (+1)</td><td>Low Cost</td><td class="add">RM 1,200 – 1,800</td></tr>
+      <tr><td class="it">Batik Air</td><td>OD 820</td><td>10:30 PM</td><td>06:00 AM (+1)</td><td>Low Cost</td><td class="add">RM 1,600 – 2,100</td></tr>
+    </tbody></table>
+    <h3 style="margin-top:14px">KUL → Jeju (CJU)</h3>
+    <table class="ctbl"><thead><tr><th>Airline</th><th>Flight</th><th>Departs KUL</th><th>Arrives CJU</th><th>Transit</th><th>Type</th><th>Anggaran Round-Trip</th></tr></thead><tbody>
+      <tr><td class="it">Scoot</td><td>TR 453 / TR 812</td><td>9:50 PM</td><td>08:45 AM (+1)</td><td>Singapore (SIN)</td><td>Low Cost</td><td class="add">RM 1,200 – 1,600</td></tr>
+    </tbody></table>
+    <p class="custnote">Anggaran harga round-trip sahaja &amp; berubah ikut tarikh/musim — sahkan dengan sistem tempahan. Sumber: Flight Recommendation.</p>
+  </div>
+`;
+function injectFlight(){
+  var fb=document.getElementById("topic-flight");
+  if(!fb || fb.querySelector(".flt-reco")) return;
+  var h2=fb.querySelector("h2");
+  if(h2) h2.insertAdjacentHTML("afterend", FLIGHT_RECO_HTML);
+}
 function build(md){
   const secs=parse(md);const cont=$("#content");cont.innerHTML="";
   const info={},qs={};TOPICS.forEach(t=>qs[t.id]=[]);
@@ -1257,7 +1342,7 @@ function build(md){
       sec.appendChild(d);});
     cont.appendChild(sec);
   });
-  [["custom",CUSTOM_HTML],["surcharge",SURCHARGE_HTML],["transport",TRANSPORT_HTML],["itinsugg",ITINSUGG_HTML],["wheelchair",WHEELCHAIR_HTML]].forEach(function(b){
+  [["compare",COMPARE_HTML],["custom",CUSTOM_HTML],["surcharge",SURCHARGE_HTML],["transport",TRANSPORT_HTML],["itinsugg",ITINSUGG_HTML],["wheelchair",WHEELCHAIR_HTML],["freegift",FREEGIFT_HTML]].forEach(function(b){
     const s=document.createElement("section");s.className="block hidden";s.dataset.topic=b[0];s.id="topic-"+b[0];s.innerHTML=b[1];cont.appendChild(s);
   });
   var _stay=document.querySelector('.block[data-topic="stay"]');if(_stay)_stay.insertAdjacentHTML("afterbegin",renderHotels());
@@ -1319,13 +1404,13 @@ document.addEventListener("click",function(e){
   var img=e.target.closest(".hmain img,.actim img,.adhero img,.vthumb img");
   if(img){var s=img.currentSrc||img.src;if(s){document.getElementById("lbImg").src=s;lb.classList.add("on");}}
 });
-build($("#snapshot").textContent);
+build($("#snapshot").textContent);injectFlight();
 (async()=>{try{
   if(!window.cowork||!window.cowork.callMcpTool){setStatus("","Paparan snapshot (buka dalam Cowork untuk versi live dari Drive)");return;}
   const r=await window.cowork.callMcpTool(DRIVE_TOOL,{fileId:FILE_ID});
   const data=r.structuredContent??JSON.parse(r.content[0].text);
   const md=data.fileContent||data.content||"";
-  if(md&&md.length>200){build(md);const now=new Date().toLocaleString("ms-MY",{dateStyle:"medium",timeStyle:"short"});setStatus("live","Versi terkini dari Drive · dimuatkan "+now);}
+  if(md&&md.length>200){build(md);injectFlight();const now=new Date().toLocaleString("ms-MY",{dateStyle:"medium",timeStyle:"short"});setStatus("live","Versi terkini dari Drive · dimuatkan "+now);}
   else setStatus("","Paparan snapshot (live fetch kosong)");
 }catch(e){console.error("live fetch failed",e);setStatus("","Paparan snapshot (live fetch gagal)");}})();
 </script>
